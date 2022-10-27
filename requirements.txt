@@ -1,7 +1,6 @@
 asgiref==3.5.2
 bcrypt==3.2.0
 beautifulsoup4==4.11.1
-dbus-python==1.2.18
 dj-database-url==1.0.0
 Django==4.1.1
 django-bootstrap-v5==1.0.11
