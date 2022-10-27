@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load likes_options %}
+
+{% block content %}
+	<h2>{{ question }}</h2>
+	{% if question.tags.all %}
+		<p>Tags: 
+			{% for tag in question.tags.all %}
+				<a href="{% url 'qa:tagged' tag.slug %}">#{{ tag.name }}</a> 
+			{% endfor %}
+		</p>
+	{% endif %}
+	<h4>{{ question.text }}</h4>
+	{% q_like_button question user.id request.path %}
+	<ul>
+		{% for answer in answers %}
+			<li><p>{{ answer.text }}</p></li>
+			{% if answer.is_correct %}
+				<h5>It's a correct answer!</h5>
+			{% endif %}
+			{% a_like_button answer user.id request.path %}
+			{% if user == question.author %}
+				<form action="{% url 'qa:answer_correct' %}" method='POST'>
+					{% csrf_token %}
+					<input type='hidden' name='answer_id' value='{{ answer.id }}'>
+					<button name='submit'>
+						{% if answer.is_correct %}
+							Wrong! 
+						{% else %}
+							Correct! 
+						{% endif %}
+					</button>
+				</form>
+			{% endif %}
+		{% endfor %}
+	</ul>
+	{% if user.is_authenticated %}
+		<form action="{% url 'qa:question' question.id %}" method='POST'>
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button name='submit'>Send</button>
+		</form>
+	{% endif %}
+{% endblock content %}

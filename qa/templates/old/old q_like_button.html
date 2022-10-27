@@ -1,0 +1,29 @@
+<form action="{% url 'qa:question_like' %}" method='POST'>
+	{% csrf_token %}
+	<input type='hidden' name='url_from' value='{{ url_from }}'>
+	<input type='hidden' name='question_id' value='{{ question.id }}'>
+	<button name='submit' class="btn btn-danger">
+		{% if is_liked %}
+			LIKES: 
+		{% else %}
+			likes: 
+		{% endif %}
+		{{ likes_count }}
+	</button>
+</form>
+
+<!--
+<form action="{% url 'qa:question_like' %}" method='POST'>
+	{% csrf_token %}
+	<input type='hidden' name='url_from' value='{{ url_from }}'>
+	<input type='hidden' name='question_id' value='{{ question.id }}'>
+	<button name='submit'>
+		{% if is_liked %}
+			LIKES: 
+		{% else %}
+			likes: 
+		{% endif %}
+		{{ likes_count }}
+	</button>
+</form>
+-->

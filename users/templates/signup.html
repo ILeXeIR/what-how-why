@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block content %}
+	<h3 class="mb-3 mt-1">Registeration of a new user</h2>
+	<h5 class="mb-3 mt-1">Enter your login, email and password</h5>
+	<form action="{% url 'users:signup' %}" method='POST'>
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button name='submit' class="btn btn-primary mt-2">Sign up</button>
+		{% endbuttons %}
+		<input type='hidden' name='next' value="{% url 'qa:index' %}" />
+	</form>
+{% endblock content %}

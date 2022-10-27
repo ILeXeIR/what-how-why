@@ -1,0 +1,16 @@
+{% load static %}
+
+<form action="{% url 'qa:question_like' %}" method='POST'>
+	{% csrf_token %}
+	<input type='hidden' name='url_from' value='{{ url_from }}'>
+	<input type='hidden' name='question_id' value='{{ question.id }}'>
+	<button name='submit' class="btn btn-danger qlike">
+		{% if is_liked %}
+			<i class="fa-solid fa-heart"></i>
+		{% else %}
+			<i class="fa-regular fa-heart"></i>
+		{% endif %}
+		{{ likes_count }}
+	</button>
+</form>
+

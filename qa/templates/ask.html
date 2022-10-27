@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block content %}
+	<h4 class="mb-3 mt-1">Ask your question:</h4>
+	<form action="{% url 'qa:ask' %}" method='POST'>
+		{% csrf_token %}
+		{% bootstrap_form form %}
+		{% buttons %}
+			<button name='submit' class="btn btn-primary">Ask</button>
+		{% endbuttons %}
+		<input type='hidden' name='next' value="{% url 'qa:index' %}" />
+	</form>
+{% endblock content %}

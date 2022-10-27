@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load likes_options %}
+
+{% block content %}
+  <div>
+	<h3 class="mb-3 mt-1">{{ question }}</h3>
+	<p class="question_text">{{ question.text }}</p>
+	{% if question.tags.all %}
+	  <p class="text-muted">Tags: 
+	  	{% for tag in question.tags.all %}
+	  	  <span class="popular_tag badge rounded-pill bg-primary bg-opacity-25 px-3 m-1">
+	  	    <a href="{% url 'qa:tagged' tag.slug %}">#{{ tag.name }}</a> 
+	  	  </span>
+	  	{% endfor %}
+	  </p>
+	{% endif %}
+	{% q_like_button question user.id request.path %}
+	<div class="text-muted d-inline-flex w-100 mt-3">
+      {% if question.author.profile.avatar %}
+        <div class="avatar-footer" 
+          style="background-image: url('{{ question.author.profile.avatar.url }}');">
+        </div>
+      {% endif %}
+      <div class="me-auto">
+        by {{ question.author }}
+      </div>
+      <div>
+        {{ question.added_at|time:"H:i" }} {{ question.added_at|date:"d.m.Y" }}
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div>
+  	{% if not answers %}
+  	  <p>There is no answers yet.</p>
+  	{% endif %}
+	{% for answer in answers %}
+	  <div class="card">
+	  	{% if answer.is_correct %}
+          <div class="card-body bg-primary bg-opacity-25">
+        {% else %}
+          <div class="card-body">
+        {% endif %}
+		  <p class="card-text">{{ answer.text }}</p>
+		  <div class="d-inline-flex">
+		  {% a_like_button answer user.id request.path %}
+		  {% if user == question.author %}
+		  	<form action="{% url 'qa:answer_correct' %}" method='POST'>
+		  	  {% csrf_token %}
+		  	    <input type='hidden' name='answer_id' value='{{ answer.id }}'>
+		  	    <button name='submit' class="btn btn-primary ms-2 btn-sm">
+		  	      {% if answer.is_correct %}
+		  	      	Wrong! 
+		  	      {% else %}
+		  	      	Correct! 
+		  	      {% endif %}
+		  	    </button>
+		  	</form>
+		  {% endif %}
+		  </div>
+		</div>
+		<div class="card-footer text-muted d-inline-flex">
+          {% if answer.author.profile.avatar %}
+            <div class="avatar-footer" 
+              style="background-image: url('{{ answer.author.profile.avatar.url }}');">
+            </div>
+          {% endif %}
+          <div>
+            by {{ answer.author }}
+          </div>
+          {% if answer.is_correct %}
+		    <div class="ms-auto"><b>Correct answer!</b></div>
+		  {% endif %}
+          <div class="ms-auto">
+            {{ answer.added_at|time:"H:i" }} {{ answer.added_at|date:"d.m.Y" }}
+          </div>
+        </div>
+	  </div>
+	{% endfor %}
+	<hr>
+	{% if user.is_authenticated %}
+	  <div class="mb-3">
+		<form action="{% url 'qa:question' question.id %}" method='POST'>
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button name='submit' class="btn btn-primary">Send</button>
+		</form>
+	  </div>
+	{% endif %}
+  </div>
+{% endblock content %}
+
+

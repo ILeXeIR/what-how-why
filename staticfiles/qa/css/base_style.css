@@ -1,0 +1,49 @@
+a {
+	text-decoration: none;
+	color: black;
+}
+
+div.card {
+	margin-bottom: 20px;
+}
+
+.navbar-text {
+	color: rgba(255, 255, 255, 1);
+}
+
+.avatar-nav {
+	height: 40px;
+	width: 40px;
+	background-position: center center;
+	background-size: cover;
+	border-radius: 5px;
+}
+
+.avatar-big {
+	height: 200px;
+	width: 200px;
+	background-position: center center;
+	background-size: cover;
+}
+
+.avatar-footer {
+	height: 24px;
+	width: 24px;
+	background-position: center center;
+	background-size: cover;
+	border-radius: 4px;
+	margin-right: 8px;
+}
+
+.popular_tag {
+	color: $blue-700;
+	background-color: $blue-900;
+}
+
+.question_text {
+	font-size: 18px;
+}
+
+.btn-outline-light {
+    --bs-btn-hover-color: #0d6efd;
+}

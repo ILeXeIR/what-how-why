@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<p>Ask your question:</p>
+	<form action="{% url 'qa:ask' %}" method='POST'>
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button name='submit'>Ask</button>
+		<input type='hidden' name='next' value="{% url 'qa:index' %}" />
+	</form>
+{% endblock content %}

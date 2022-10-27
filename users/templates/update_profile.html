@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block content %}
+	<h3 class="mb-3 mt-1">Edit settings: {{ user.username }}</h2>
+	<form action="{% url 'users:update_profile' %}" method='POST' enctype='multipart/form-data'>
+		{% csrf_token %}
+		{% bootstrap_form user_form %}
+		{% if user.profile.avatar %}
+			<div class="avatar-big" style="background-image: url('{{ user.profile.avatar.url }}');">
+        	</div>
+		{% endif %}
+		{% bootstrap_form profile_form %}
+		{% buttons %}
+			<button name='submit' class="btn btn-primary mt-2">Save</button>
+		{% endbuttons %}
+		<input type='hidden' name='next' value="{% url 'users:show_profile' %}" />
+	</form>
+{% endblock content %}

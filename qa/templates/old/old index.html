@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load likes_options %}
+
+{% block content %}
+	<h3>
+		{% if order == 'new' %}
+			<span>New questions</span>
+		{% else %}
+			<a href="{% url 'qa:index' %}">New questions</a>
+		{% endif %} | 
+		{% if order == 'popular' %}
+			<span>Hot questions</span>
+		{% else %}
+			<a href="{% url 'qa:popular' %}">Hot questions</a>
+		{% endif %}
+	</h3>
+	{% if tag_filter %}
+		<h2>Filtered by #{{ tag_filter }}</h2>
+	{% endif %}
+<!--
+  {% for question in questions %}
+	<div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="{% url 'qa:question' question.id %}" class="card-link">{{ question }}</a>
+        </h4>
+        <p class="card-text">{{ question.text|truncatewords:50 }}</p>
+        <p class="card-text">Answers: {{ question.answer_set.count }}</p>
+        {% if question.tags.all %}
+		  <p class="card-text">Tags: 
+		  	{% for tag in question.tags.all %}
+		  	  <span class="badge text-bg-secondary">
+		  	    <a href="{% url 'qa:tagged' tag.slug %}">#{{ tag.name }} ></a>
+		  	  </span>
+		  	{% endfor %}
+		  </p>
+		{% endif %}  
+		{% q_like_button question user.id request.get_full_path %}
+      </div>
+      <div class="card-footer text-muted text-end">
+        by {{ question.author }} | {{ question.added_at }}
+      </div>
+    </div>
+  {% endfor %}
+-->
+
+	<ul>
+		{% for question in questions %}
+			<li><div>
+				<h2><a href="{% url 'qa:question' question.id %}">{{ question }}</a></h2>
+				<p>{{ question.text|truncatewords:30 }}</p>
+				<p>Answers: {{ question.answer_set.count }}</p>
+				{% if question.tags.all %}
+					<p>Tags: 
+						{% for tag in question.tags.all %}
+							<a href="{% url 'qa:tagged' tag.slug %}">#{{ tag.name }} ></a>
+						{% endfor %}
+					</p>
+				{% endif %}
+				{% q_like_button question user.id request.get_full_path %}
+				<p>by {{ question.author }} | {{ question.added_at }}</p>
+				<hr>
+			</div></li>
+		{% endfor %}
+	</ul>
+-->
+
+	<nav><ul class="paginator">
+		{% for p in paginator.page_range %}
+			{% if p == page.number %}
+				<li class="active">
+			{% else %}
+				<li>
+			{% endif %}
+				<a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>
+			</li>
+		{% endfor %}
+	</nav></ul>
+{% endblock content %}

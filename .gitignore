@@ -1,0 +1,5 @@
+__pycache__/
+media/
+passwords.txt
+next_steps.txt
+*.sqlite3

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h3 class="mb-3 mt-1">Settings: {{ user.username }}</h2>
+	{% if profile.avatar %}
+		<div class="avatar-big" style="background-image: url('{{ profile.avatar.url }}');">
+        </div>
+	{% endif %}
+	<p class="my-4"><b>Username:</b> {{ user.username }}<br>
+	  <b>Email:</b> {{ user.email }}<br>
+	  <b>Date of registration:</b> {{ user.date_joined }}</p>
+	<p class="my-4"><a class="btn btn-primary" role="button" href="{% url 'users:update_profile' %}">Edit</a><p>
+{% endblock content %}

@@ -1,0 +1,10 @@
+<div class="popular_tags mx-2">
+  <h4 class="mb-3 mt-1">Popular Tags</h4>
+  <h5>			
+  {% for tag in popular_tags %}
+  	<span class="popular_tag badge rounded-pill bg-primary bg-opacity-25 px-3 m-1">
+      <a href="{% url 'qa:tagged' tag.slug %}">{{ tag }}</a> 
+    </span>
+  {% endfor %}		
+  </h5>
+</div>
