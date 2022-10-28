@@ -9,7 +9,7 @@
 	  <p class="text-muted">Tags: 
 	  	{% for tag in question.tags.all %}
 	  	  <span class="popular_tag badge rounded-pill bg-primary bg-opacity-25 px-3 m-1">
-	  	    <a href="{% url 'qa:tagged' tag.slug %}">#{{ tag.name }}</a> 
+	  	    <a href="{% url 'qa:tagged' tag.slug %}">{{ tag.name }}</a> 
 	  	  </span>
 	  	{% endfor %}
 	  </p>

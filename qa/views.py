@@ -46,7 +46,7 @@ def tagged (request, slug):
 
 def question(request, question_id):
     question = get_object_or_404(Question, id=question_id)
-    answers = question.answer_set.order_by('-added_at')
+    answers = question.answer_set.order_by('added_at')
     if request.method != 'POST':
         form = AnswerForm()
     else:
