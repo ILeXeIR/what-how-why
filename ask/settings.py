@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@vv2ge7vs5br+w-3x9@()a5#8j&a^8l#(wo8k&=ut+0h7%q77c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '.herokuapp.com']
 
@@ -148,3 +148,7 @@ MEDIA_URL = ('/media/')
 import django_heroku
 django_heroku.settings(locals())
 
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
+    DEBUG = False
