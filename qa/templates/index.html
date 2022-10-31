@@ -29,7 +29,7 @@
         <h4 class="card-title mb-3 mt-1">
           <a href="{% url 'qa:question' question.id %}" class="card-link">{{ question }}</a>
         </h4>
-        <p class="card-text question_text">{{ question.text|truncatewords:50 }}</p>
+        <p class="card-text question_text">{{ question.text|linebreaks|truncatewords:50 }}</p>
         <div class="d-inline-flex align-items-center">
           {% q_like_button question user.id request.get_full_path %}
           <div class="card-text text-muted ms-4">Answers: {{ question.answer_set.count }}</div>

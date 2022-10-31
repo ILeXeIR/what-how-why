@@ -4,7 +4,7 @@
 {% block content %}
   <div>
 	<h3 class="mb-3 mt-1">{{ question }}</h3>
-	<p class="question_text">{{ question.text }}</p>
+	<p class="question_text">{{ question.text|linebreaks }}</p>
 	{% if question.tags.all %}
 	  <p class="text-muted">Tags: 
 	  	{% for tag in question.tags.all %}
@@ -41,7 +41,7 @@
         {% else %}
           <div class="card-body">
         {% endif %}
-		  <p class="card-text">{{ answer.text }}</p>
+		  <p class="card-text">{{ answer.text|linebreaks }}</p>
 		  <div class="d-inline-flex">
 		  {% a_like_button answer user.id request.path %}
 		  {% if user == question.author %}

@@ -20,7 +20,7 @@ class Question(models.Model):
 	added_at = models.DateTimeField(auto_now_add=True)
 	author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 	likes = models.ManyToManyField(User, related_name='question_like_user', blank=True)
-	tags = TaggableManager()
+	tags = TaggableManager(blank=True)
 	objects = QuestionManager()
 
 	def __str__(self):
