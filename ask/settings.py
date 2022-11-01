@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'qa',
     'users',
 
-    #foreign apps
+    #external apps
     'taggit',
     'bootstrap5',
 
@@ -47,6 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #more external apps
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -143,6 +148,12 @@ LOGIN_URL = '/users/login/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = ('/media/')
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxldlh6tv',
+    'API_KEY': '134423744849957',
+    'API_SECRET': '2Z-Gb0IaJj-r1moJ8c9wVXi8u2E'
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 #Heroku
 import django_heroku
