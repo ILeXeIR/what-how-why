@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@vv2ge7vs5br+w-3x9@()a5#8j&a^8l#(wo8k&=ut+0h7%q77c'
+#SECRET_KEY = 'django-insecure-@vv2ge7vs5br+w-3x9@()a5#8j&a^8l#(wo8k&=ut+0h7%q77c'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = False
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '.herokuapp.com']
 
@@ -92,9 +93,9 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stepic_web',
-        'USER': 'alexander',
-        'PASSWORD': 'alex37',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
     }
 }
 
@@ -149,9 +150,9 @@ LOGIN_URL = '/users/login/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = ('/media/')
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dxldlh6tv',
-    'API_KEY': '134423744849957',
-    'API_SECRET': '2Z-Gb0IaJj-r1moJ8c9wVXi8u2E'
+    'CLOUD_NAME': os.environ.get('CL_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CL_API_KEY'),
+    'API_SECRET': os.environ.get('CL_API_SECRET'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 

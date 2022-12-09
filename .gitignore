@@ -3,3 +3,4 @@ media/
 passwords.txt
 next_steps.txt
 *.sqlite3
+.env
